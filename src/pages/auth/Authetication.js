@@ -17,6 +17,7 @@ const Authentication = ({ navigation }) => {
     if(typeof login != 'string') return
     setInvalidForm(false)
   }
+  
 
   return (
     <View style={styles.container}>
