@@ -18,9 +18,9 @@ const ProductCard = ({ imageUrl, name, price, quantity }) => {
 };
 
 const Dashboard = ({ navigation }) => {
-  const [productData, setProductData] = useState([]);
-  const [getImages,   setGetImages] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [ productData, setProductData] = useState([]);
+  const [ getImages,   setGetImages  ] = useState(false);
+  const [ isLoading,   setIsLoading  ] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
