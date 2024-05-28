@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { Text, View, TextInput, Pressable, ImageBackground } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 import styles from './styles';
-import Footer from '../components/footer/footer'
+import Footer from '../components/footer/footer';
 
 const Dashboard = ({ navigation }) => {
   return (
-    <View >
+    <View style={styles.container}>
+      <View style={styles.content}>
         <Text>DASHBOARD</Text>
-        <Footer />
+        {/* Adicione mais conteúdo aqui */}
+      </View>
+      <Footer />
     </View>
   );
 };
