@@ -16,7 +16,11 @@ const handleSubmit = async (product = {}) => {
   try {
     const auth = getAuth();
     const db = getFirestore();
-    await addDoc(collection(db, 'purchases'), { product_id: product?.id, user_email: auth.currentUser.email });
+    await addDoc(collection(db, 'purchases'), { 
+      product_id: product?.id, 
+      user_email: auth.currentUser.email,
+      created_at: new Date()
+    });
     console.log('Produto adicionado com sucesso:', product);
   } catch (error) {
     console.error('Erro ao adicionar o produto:', error);

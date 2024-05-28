@@ -3,13 +3,17 @@ import { Text, View, Image, ActivityIndicator, ScrollView } from 'react-native';
 import styles from './styles';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/Header';
+import { getAuth } from 'firebase/auth';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
+const auth = getAuth()
+
 const Orders = ({ navigation }) => {
-  const [buttonPress, setButtonPress] = useState(false);
   const [productData, setProductData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [purchases, setPurchases] = useState([]);
+  const [purchasedProducts, setPurchasedProducts] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,12 +42,31 @@ const Orders = ({ navigation }) => {
         setIsLoading(false);
       };
 
-      getImageUrls();
+      const getPurchases = async () => {
+        const db = getFirestore();
+        const productCollection = collection(db, 'purchases');
+        const snapshot = await getDocs(productCollection);
+        const purchasesListed = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setPurchases(purchasesListed);
+      };
+
+      await getImageUrls();
+      await getPurchases();
     };
 
     fetchProducts();
   }, []);
-  
+
+  useEffect(() => {
+    const purchased = productData.some(product =>
+      purchases.find(purchase => product.id === purchase.product_id && auth.currentUser.email == purchase.user_email)
+    );
+    setPurchasedProducts(purchased);
+  }, [productData, purchases]);
+
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
@@ -53,21 +76,27 @@ const Orders = ({ navigation }) => {
             isLoading ? (
               <ActivityIndicator size="large" color="#000" />
             ) : productData.map((product) => { 
-              return (
-                <View style={styles.orderContainer}>
-                  <View style={styles.orderDescription}>
-                    <Text style={styles.description}>Terça, 28/05/2024</Text>
-                    <Text style={styles.description}>Farmácias Pague mais</Text>
+              if(purchases.find((purchase) => product.id === purchase.product_id && auth.currentUser.email == purchase.user_email)){
+                return (
+                  <View style={styles.orderContainer} key={product.id}>
+                    <View style={styles.orderDescription}>
+                      <Text style={styles.description}>Terça, 28/05/2024</Text>
+                      <Text style={styles.description}>Farmácias Pague mais</Text>
+                    </View>
+                    <View style={styles.card}>
+                      <Image source={{ uri: product.imageUrl }} style={styles.image} />
+                      <Text style={styles.name}>{product.name}</Text>
+                      <Text style={styles.description}>R$ {product.price?.toFixed(2)}</Text>
+                      <Text style={styles.description}>{product.quantity?.toFixed(0)} comprimidos</Text>
+                    </View>
                   </View>
-                  <View style={styles.card} key={product.id}>
-                    <Image source={{ uri: product.imageUrl }} style={styles.image} />
-                    <Text style={styles.name}>{product.name}</Text>
-                    <Text style={styles.description}>R$ {product.price?.toFixed(2)}</Text>
-                    <Text style={styles.description}>{product.quantity?.toFixed(0)} comprimidos</Text>
-                  </View>
-                </View>
-              )
+                );
+              }
+              return null;
             })
+          }
+          {
+            purchasedProducts ? null : <Text style={{ fontSize: 15, fontWeight: 'bold' }}> Nenhum produto adiquirido </Text>
           }
         </ScrollView>
       </View>
