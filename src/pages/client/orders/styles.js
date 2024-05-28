@@ -5,16 +5,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
+
   header: {
     position: 'absolute',
     top: 0,
     width: '100%',
     zIndex: 1,
   },
+
   content: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    marginTop: 150,
   },
 
   orderContainer : {
