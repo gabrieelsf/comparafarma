@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, ActivityIndicator } from 'react-native';
+import { Text, View, Image, ActivityIndicator, ScrollView } from 'react-native';
 import styles from './styles';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/Header';
@@ -48,25 +48,28 @@ const Orders = ({ navigation }) => {
     <View style={styles.container}>
       <Header navigation={navigation} />
       <View style={styles.content}>
-        {
-          isLoading ? (
-            <ActivityIndicator size="large" color="#000" />
-          ) : productData.map((product) =>(
-            
-            <View style={styles.orderContainer}>
-              <View style={styles.orderDescription}>
-                <Text style={styles.description}>Terça, 28/05/2024</Text>
-                <Text style={styles.description}>Farmácias Pague mais</Text>
-              </View>
-              <View style={styles.card} key={product.id}>
-                <Image source={{ uri: product.imageUrl }} style={styles.image} />
-                <Text style={styles.name}>{product.name}</Text>
-                <Text style={styles.description}>R$ {product.price?.toFixed(2)}</Text>
-                <Text style={styles.description}>{product.quantity?.toFixed(0)} comprimidos</Text>
-              </View>
-            </View>
-          ))
-        }
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {
+            isLoading ? (
+              <ActivityIndicator size="large" color="#000" />
+            ) : productData.map((product) => { 
+              return (
+                <View style={styles.orderContainer}>
+                  <View style={styles.orderDescription}>
+                    <Text style={styles.description}>Terça, 28/05/2024</Text>
+                    <Text style={styles.description}>Farmácias Pague mais</Text>
+                  </View>
+                  <View style={styles.card} key={product.id}>
+                    <Image source={{ uri: product.imageUrl }} style={styles.image} />
+                    <Text style={styles.name}>{product.name}</Text>
+                    <Text style={styles.description}>R$ {product.price?.toFixed(2)}</Text>
+                    <Text style={styles.description}>{product.quantity?.toFixed(0)} comprimidos</Text>
+                  </View>
+                </View>
+              )
+            })
+          }
+        </ScrollView>
       </View>
       <Footer navigation={navigation}/>
     </View>

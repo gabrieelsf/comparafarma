@@ -20,6 +20,13 @@ const styles = StyleSheet.create({
     marginTop: 150,
   },
 
+  scrollContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingBottom: 100,
+  },
+
   orderContainer : {
     width: '90%',
     display: 'flex',

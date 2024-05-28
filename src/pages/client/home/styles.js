@@ -62,6 +62,30 @@ const styles = StyleSheet.create({
     color: '#333',
   },
 
+  button: {
+    color: '#FFFF',
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: '#1C1A58',
+    width: '100%',
+    marginTop: 5,
+    borderRadius: 10
+  },
+
+  buttonHover: {
+    color: '#FFFF',
+    marginTop: 5,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: '#151341',
+    width: '100%',
+    borderRadius: 10
+  },
+
   footer: {
     position: 'absolute',
     bottom: 0,
