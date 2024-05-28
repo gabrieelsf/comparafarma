@@ -17,13 +17,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  orderContainer : {
+    width: '90%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  orderDescription: {
+    height: '100%',
+    marginVertical: 20,
+    marginTop: 40
+  },
+
   card: {
     backgroundColor: '#FFF',
     borderRadius: 8,
     marginBottom: 20,
     marginTop: 10,
     padding: 15,
-    height: '30%',
+    height: '90%',
     width: '50%',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

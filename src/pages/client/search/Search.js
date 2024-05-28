@@ -54,7 +54,7 @@ const Search = ({ navigation }) => {
           placeholderTextColor="#FFF"
         />
         <View style={styles.quickSearchContainer}>
-                    <Pressable
+          <Pressable
             style={buttonPress == 'antibiotic' ? styles.buttonHover : styles.button}
             onPressIn={() => setButtonPress('antibiotic')}
             onPressOut={() => setButtonPress(false)}

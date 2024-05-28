@@ -52,11 +52,17 @@ const Orders = ({ navigation }) => {
           isLoading ? (
             <ActivityIndicator size="large" color="#000" />
           ) : (
-            <View style={styles.card} key={productData[0]?.id}>
-              <Image source={{ uri: productData[0]?.imageUrl }} style={styles.image} />
-              <Text style={styles.name}>{productData[0]?.name}</Text>
-              <Text style={styles.description}>R$ {productData[0]?.price?.toFixed(2)}</Text>
-              <Text style={styles.description}>{productData[0]?.quantity?.toFixed(0)} comprimidos</Text>
+            <View style={styles.orderContainer}>
+              <View style={styles.orderDescription}>
+                <Text style={styles.description}>Terça, 28/05/2024</Text>
+                <Text style={styles.description}>Farmácias Pague mais</Text>
+              </View>
+              <View style={styles.card} key={productData[0]?.id}>
+                <Image source={{ uri: productData[0]?.imageUrl }} style={styles.image} />
+                <Text style={styles.name}>{productData[0]?.name}</Text>
+                <Text style={styles.description}>R$ {productData[0]?.price?.toFixed(2)}</Text>
+                <Text style={styles.description}>{productData[0]?.quantity?.toFixed(0)} comprimidos</Text>
+              </View>
             </View>
           )
         }

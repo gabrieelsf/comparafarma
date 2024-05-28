@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start', // Alterado para flex-start
+    justifyContent: 'flex-start',
   },
 
   inputContainer: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '90%',
+    width: '98%',
     flexWrap: 'wrap',
     flexDirection: 'row',
   },
