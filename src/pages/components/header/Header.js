@@ -11,7 +11,7 @@ const Header = ({ navigation }) => {
           <Icon style={styles.icons} size={23} name="user" color="#FFF" onPress={() => navigation.navigate("home")} />
         </View>
         <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Compara Farma</Text>
-        <Icon style={styles.icons} size={23} name="bell" onPress={() => navigation.navigate("settings")} />
+        <Icon style={styles.icons} size={23} name="bell" onPress={() => navigation.navigate("notifications")} />
       </View>
     </View>
   );

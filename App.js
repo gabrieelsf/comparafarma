@@ -12,6 +12,7 @@ import Dashboard      from './src/pages/client/home/Dashboard';
 import Settings       from './src/pages/client/settings/Settings';
 import Search         from './src/pages/client/search/Search';
 import Orders         from './src/pages/client/orders/Orders';
+import Notifications  from './src/pages/client/notifications/Notifications';
 
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -78,6 +79,11 @@ const App = () => {
         <Stack.Screen
           name="orders"
           component={Orders}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="notifications"
+          component={Notifications}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
