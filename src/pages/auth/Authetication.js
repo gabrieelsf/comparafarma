@@ -20,7 +20,7 @@ const Authentication = ({ navigation }) => {
     signInWithEmailAndPassword(auth, login, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigation.navigate('dashboard')
+        navigation.navigate('home')
       })
       .catch((error) => {
         const errorCode = error.code;

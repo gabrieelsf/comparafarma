@@ -28,7 +28,7 @@ const App = () => {
           component={Register}
         />
         <Stack.Screen
-          name="dashboard"
+          name="home"
           component={Dashboard}
           options={{ headerShown: false }}
         />

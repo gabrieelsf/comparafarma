@@ -8,7 +8,6 @@ const Dashboard = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <Text>DASHBOARD</Text>
-        {/* Adicione mais conteúdo aqui */}
       </View>
       <Footer />
     </View>

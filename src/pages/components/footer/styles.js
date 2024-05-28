@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		backgroundColor: '#B7F9E1',
 	},
-	wrapper: {
+	content: {
 		display: 'flex',
 		width: '60%',
 		flexDirection: 'row',
