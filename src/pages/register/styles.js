@@ -9,10 +9,20 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  
+  keyboardAvoidingView: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+  },
+
+  scrollContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
   form: {
-    height: '30%',
-    width: '70%',
+    width: '80%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -73,4 +83,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default styles
+export default styles;

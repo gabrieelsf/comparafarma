@@ -7,10 +7,18 @@ const Footer = ({ navigation }) => {
   return (
     <View style={styles.footer}>
       <View style={styles.content}>
-        <Icon style={styles.icons} size={15} name="home"  />
-        <Icon style={styles.icons} size={15} name="search"  />
-        <Icon style={styles.icons} size={15} name="shopping-bag"  />
-        <Icon style={styles.icons} size={15} name="cog"  />
+        <Pressable style={styles.pressable} onPress={() => navigation.navigate("home")}>
+          <Icon style={styles.icons} size={30} name="home" />
+        </Pressable>
+        <Pressable style={styles.pressable} onPress={() => navigation.navigate("search")}>
+          <Icon style={styles.icons} size={30} name="search" />
+        </Pressable>
+        <Pressable style={styles.pressable} onPress={() => navigation.navigate("orders")}>
+          <Icon style={styles.icons} size={30} name="shopping-bag" />
+        </Pressable>
+        <Pressable style={styles.pressable} onPress={() => navigation.navigate("settings")}>
+          <Icon style={styles.icons} size={30} name="cog" />
+        </Pressable>
       </View>
     </View>
   );

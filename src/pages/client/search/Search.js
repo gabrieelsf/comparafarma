@@ -1,17 +1,17 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
-import Footer from '../components/footer/footer';
+import Footer from '../../components/footer/footer';
 
-const Dashboard = ({ navigation }) => {
+const Search = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text>DASHBOARD</Text>
+        <Text>SEARCH</Text>
       </View>
-      <Footer />
+      <Footer navigation={navigation}/>
     </View>
   );
 };
 
-export default Dashboard;
+export default Search;

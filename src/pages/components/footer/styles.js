@@ -4,18 +4,24 @@ const styles = StyleSheet.create({
 	footer: {
 		display: 'flex',
 		width: '100%',
-		height: 60,
+		height: 90,
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#B7F9E1',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    zIndex: 1,
 	},
+  pressable: {
+    padding: 5,
+  },
 	content: {
 		display: 'flex',
-		width: '60%',
+		height: '55%',
+		width: '70%',
 		flexDirection: 'row',
-		alignItems: 'center',
 		justifyContent: 'space-between',
-		height: '100%',
 	},
 	icons: {
 		color: '#000',

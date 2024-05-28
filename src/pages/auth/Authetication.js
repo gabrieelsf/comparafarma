@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput, Pressable, ImageBackground } from 'react-native';
-import styles            from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './styles';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import firebaseConfig    from '../../database/config.json';
-import Icon              from 'react-native-vector-icons/FontAwesome';
+import firebaseConfig from '../../database/config.json';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 const auth = getAuth();
 
 const Authentication = ({ navigation }) => {
@@ -18,9 +19,10 @@ const Authentication = ({ navigation }) => {
 
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, login, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const user = userCredential.user;
-        navigation.navigate('home')
+        await AsyncStorage.setItem('userToken', user.uid);
+        navigation.navigate('home');
       })
       .catch((error) => {
         const errorCode = error.code;

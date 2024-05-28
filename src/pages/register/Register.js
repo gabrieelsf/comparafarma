@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, Pressable, ImageBackground } from 'react-native';
+import { Text, View, TextInput, Pressable, ImageBackground, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import styles from './styles';
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import firebaseConfig from '../../database/config.json'
+import firebaseConfig from '../../database/config.json';
 
-const firebaseApp = initializeApp(firebaseConfig)
+const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth();
-const db = getFirestore(firebaseApp)
-
+const db = getFirestore(firebaseApp);
 
 const Register = ({ navigation }) => {
   const [form, setForm] = useState({
@@ -75,32 +74,33 @@ const Register = ({ navigation }) => {
   const createUser = async () => {
     try {
       const docRef = await addDoc(collection(db, "users"), {
-        username:    form.username,
-        fullName:    form.fullName,
-        cpf:         form.cpf,
-        neighbor:    form.neighbor,
-        email:       form.email,
+        username: form.username,
+        fullName: form.fullName,
+        cpf: form.cpf,
+        neighbor: form.neighbor,
+        email: form.email,
         houseNumber: parseInt(form.houseNumber),
-        street:      form.street,
-        complement:  form.complement
+        street: form.street,
+        complement: form.complement
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  }
+  };
 
   const handleSubmit = () => {
     createUserWithEmailAndPassword(auth, form.email, form.password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      createUser();
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error);
-    });
+      .then((userCredential) => {
+        const user = userCredential.user;
+        createUser();
+        navigation.navigate('home');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error);
+      });
   };
 
   return (
@@ -109,110 +109,118 @@ const Register = ({ navigation }) => {
         style={styles.container}
         source={require('../../assets/loginBackground.png')}
       >
-        <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('username', text)}
-            value={form.username}
-            placeholder='Usuário'
-            maxLength={15}
-            placeholderTextColor="#FFF"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('fullName', text)}
-            value={form.fullName}
-            placeholder='Nome completo'
-            maxLength={15}
-            placeholderTextColor="#FFF"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('cpf', text)}
-            value={form.cpf}
-            placeholder='xxx.xxx.xxx-xx'
-            maxLength={18}
-            placeholderTextColor="#FFF"
-            keyboardType='numeric'
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('email', text)}
-            value={form.email}
-            placeholder='Email'
-            maxLength={200}
-            placeholderTextColor="#FFF"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('confirmEmail', text)}
-            value={form.confirmEmail}
-            placeholder='Confirmar Email'
-            maxLength={200}
-            placeholderTextColor="#FFF"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('password', text)}
-            value={form.password}
-            placeholder='Senha'
-            maxLength={15}
-            placeholderTextColor="#FFF"
-            secureTextEntry
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('confirmPassword', text)}
-            value={form.confirmPassword}
-            placeholder='Confirmar Senha'
-            maxLength={15}
-            placeholderTextColor="#FFF"
-            secureTextEntry
-          />
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={styles.inputShort}
-              onChangeText={(text) => handleChange('street', text)}
-              value={form.street}
-              placeholder='Rua'
-              maxLength={15}
-              placeholderTextColor="#FFF"
-            />
-            <TextInput
-              style={styles.inputShort}
-              onChangeText={(text) => handleChange('houseNumber', text)}
-              value={form.houseNumber}
-              placeholder='Número'
-              maxLength={15}
-              placeholderTextColor="#FFF"
-            />
-          </View>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('neighbor', text)}
-            value={form.neighbor}
-            placeholder='Bairro'
-            maxLength={15}
-            placeholderTextColor="#FFF"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => handleChange('complement', text)}
-            value={form.complement}
-            placeholder='Complemento'
-            maxLength={15}
-            placeholderTextColor="#FFF"
-          />
-          <Pressable
-            style={buttonPress ? styles.buttonHover : styles.button}
-            disabled={invalidForm}
-            onPressIn={() => setButtonPress(true)}
-            onPressOut={() => setButtonPress(false)}
-            onPress={handleSubmit}
-          >
-            <Text style={{ color: '#FFF' }}>Registrar</Text>
-          </Pressable>
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardAvoidingView}
+          keyboardVerticalOffset={100}
+        >
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <View style={styles.form}>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('username', text)}
+                value={form.username}
+                placeholder='Usuário'
+                maxLength={15}
+                placeholderTextColor="#FFF"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('fullName', text)}
+                value={form.fullName}
+                placeholder='Nome completo'
+                maxLength={15}
+                placeholderTextColor="#FFF"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('cpf', text)}
+                value={form.cpf}
+                placeholder='xxx.xxx.xxx-xx'
+                maxLength={18}
+                placeholderTextColor="#FFF"
+                keyboardType='numeric'
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('email', text)}
+                value={form.email}
+                placeholder='Email'
+                maxLength={200}
+                placeholderTextColor="#FFF"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('confirmEmail', text)}
+                value={form.confirmEmail}
+                placeholder='Confirmar Email'
+                maxLength={200}
+                placeholderTextColor="#FFF"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('password', text)}
+                value={form.password}
+                placeholder='Senha'
+                maxLength={15}
+                placeholderTextColor="#FFF"
+                secureTextEntry
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('confirmPassword', text)}
+                value={form.confirmPassword}
+                placeholder='Confirmar Senha'
+                maxLength={15}
+                placeholderTextColor="#FFF"
+                secureTextEntry
+              />
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.inputShort}
+                  onChangeText={(text) => handleChange('street', text)}
+                  value={form.street}
+                  placeholder='Rua'
+                  maxLength={15}
+                  placeholderTextColor="#FFF"
+                />
+                <TextInput
+                  style={styles.inputShort}
+                  onChangeText={(text) => handleChange('houseNumber', text)}
+                  value={form.houseNumber}
+                  placeholder='Número'
+                  maxLength={15}
+                  placeholderTextColor="#FFF"
+                />
+              </View>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('neighbor', text)}
+                value={form.neighbor}
+                placeholder='Bairro'
+                maxLength={15}
+                placeholderTextColor="#FFF"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => handleChange('complement', text)}
+                value={form.complement}
+                placeholder='Complemento'
+                maxLength={15}
+                placeholderTextColor="#FFF"
+              />
+              <Pressable
+                style={buttonPress ? styles.buttonHover : styles.button}
+                disabled={invalidForm}
+                onPressIn={() => setButtonPress(true)}
+                onPressOut={() => setButtonPress(false)}
+                onPress={handleSubmit}
+              >
+                <Text style={{ color: '#FFF' }}>Registrar</Text>
+              </Pressable>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </ImageBackground>
     </View>
   );

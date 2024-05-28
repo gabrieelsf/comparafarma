@@ -1,23 +1,56 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { View, ActivityIndicator }    from 'react-native';
+import { NavigationContainer }        from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Authentication from './src/pages/auth/Authetication'
-import Register       from './src/pages/register/Register'
-import Dashboard      from './src/pages/client/Dashboard'
-// import firebaseConfig from './src/database/config.json'
-// import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
-// import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage      from '@react-native-async-storage/async-storage';
+import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import firebaseConfig from './src/database/config.json';
+import Authentication from './src/pages/auth/Authetication';
+import Register       from './src/pages/register/Register';
+import Dashboard      from './src/pages/client/home/Dashboard';
+import Settings       from './src/pages/client/settings/Settings';
+import Search         from './src/pages/client/search/Search';
+import Orders         from './src/pages/client/orders/Orders';
+
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
 
 const Stack = createNativeStackNavigator();
 
-// const firebaseApp = initializeAuth(firebaseConfig, {
-//   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
-// });
-
 const App = () => {
+  const [initialRoute, setInitialRoute] = useState('auth');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkUserStatus = async () => {
+      const userToken = await AsyncStorage.getItem('userToken');
+
+      onAuthStateChanged(auth, (user) => {
+        if (user || userToken) {
+          setInitialRoute('home');
+        }else {
+          setInitialRoute('auth');
+        }
+        setLoading(false);
+      });
+    };
+
+    checkUserStatus();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName={initialRoute}>
         <Stack.Screen
           name="auth"
           component={Authentication}
@@ -32,9 +65,24 @@ const App = () => {
           component={Dashboard}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="settings"
+          component={Settings}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="search"
+          component={Search}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="orders"
+          component={Orders}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default App
+export default App;
