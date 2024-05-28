@@ -3,6 +3,7 @@ import { Text, View, ScrollView, Image, ActivityIndicator, Pressable } from 'rea
 import styles from './styles';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/Header';
+import { getAuth } from 'firebase/auth';
 import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
@@ -11,10 +12,11 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const handleSubmit = async (product) => {
+const handleSubmit = async (product = {}) => {
   try {
+    const auth = getAuth();
     const db = getFirestore();
-    await addDoc(collection(db, 'purchases'), product);
+    await addDoc(collection(db, 'purchases'), { product_id: product?.id, user_email: auth.currentUser.email });
     console.log('Produto adicionado com sucesso:', product);
   } catch (error) {
     console.error('Erro ao adicionar o produto:', error);
