@@ -10,6 +10,9 @@ import Authentication from './src/pages/auth/Authetication';
 import Register       from './src/pages/register/Register';
 import Dashboard      from './src/pages/client/home/Dashboard';
 import Settings       from './src/pages/client/settings/Settings';
+import Account        from './src/pages/client/settings/account/Account';
+import Payment        from './src/pages/client/settings/payment/Payment';
+import Address        from './src/pages/client/settings/address/Address';
 import Search         from './src/pages/client/search/Search';
 import Orders         from './src/pages/client/orders/Orders';
 import Notifications  from './src/pages/client/notifications/Notifications';
@@ -69,6 +72,21 @@ const App = () => {
         <Stack.Screen
           name="settings"
           component={Settings}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="account"
+          component={Account}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="payment"
+          component={Payment}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="address"
+          component={Address}
           options={{ headerShown: false }}
         />
         <Stack.Screen

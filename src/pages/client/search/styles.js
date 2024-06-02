@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   recentlySearch: {
     width: '90%',
     height: '40%',
-    marginTop: 100,
+    marginTop: 60,
   },
 
   card: {
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 10,
     padding: 15,
-    height: '80%',
+    height: '85%',
     width: '50%',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: '100%',
-    height: 150,
+    height: 100,
     marginBottom: 10,
     borderRadius: 8,
   },

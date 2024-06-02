@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
-const { width } = Dimensions.get('window');
-
+const { width, height } = Dimensions.get('window');
+const isLargeScreen = width > 1024;
 
 const styles = StyleSheet.create({
   container: {
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
-    marginTop: 140,
+    paddingHorizontal: isLargeScreen ? 35 : 17,
+    marginTop: isLargeScreen ? 140 : 140,
     marginBottom: 70,
   },
 
@@ -35,30 +35,30 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 20,
     padding: 15,
-    width: width / 2 - 40,
+    width: isLargeScreen ? width / 4 - 15 : width / 2 - 40,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
 
   image: {
     width: '100%',
-    height: 150,
+    height: isLargeScreen ? 250 : 150,
     marginBottom: 10,
     borderRadius: 8,
   },
 
   name: {
-    fontSize: 18,
+    fontSize: isLargeScreen ? 20 : 18,
     fontWeight: 'bold',
     marginBottom: 5,
   },
 
   description: {
-    fontSize: 16,
+    fontSize: isLargeScreen ? 18 : 16,
     color: '#333',
   },
 

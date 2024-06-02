@@ -49,7 +49,7 @@ const Settings = ({ navigation }) => {
           style={buttonPress == 'data' ? styles.buttonHover : styles.button}
           onPressIn={() => setButtonPress('data')}
           onPressOut={() => setButtonPress(false)}
-          onPress={() => true}
+          onPress={() => navigation.navigate('account')}
         >
           <Text style={{ color: '#FFF' }}>Dados da conta</Text>
         </Pressable>
@@ -57,7 +57,7 @@ const Settings = ({ navigation }) => {
           style={buttonPress == 'payment_methods' ? styles.buttonHover : styles.button}
           onPressIn={() => setButtonPress('payment_methods')}
           onPressOut={() => setButtonPress(false)}
-          onPress={() => true}
+          onPress={() => navigation.navigate('payment')}
         >
           <Text style={{ color: '#FFF' }}>Métodos de pagamento</Text>
         </Pressable>
@@ -65,7 +65,7 @@ const Settings = ({ navigation }) => {
           style={buttonPress == 'address' ? styles.buttonHover : styles.button}
           onPressIn={() => setButtonPress('address')}
           onPressOut={() => setButtonPress(false)}
-          onPress={() => true}
+          onPress={() => navigation.navigate('address')}
         >
           <Text style={{ color: '#FFF' }}>Endereço</Text>
         </Pressable>
