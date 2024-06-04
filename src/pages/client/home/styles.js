@@ -92,6 +92,41 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 1,
   },
+
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    marginTop: 600
+  },
+
+  buttonClose: {
+    backgroundColor: '#1C1A58',
+    marginTop: 10,
+  },
+
+  buttonCloseHover: {
+    backgroundColor: '#151341',
+    marginTop: 10,
+  },
+
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, Image, ActivityIndicator, Pressable } from 'react-native';
+import { Text, View, ScrollView, Image, ActivityIndicator, Pressable, Modal, Button } from 'react-native';
 import styles from './styles';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/Header';
@@ -19,7 +19,7 @@ const handleSubmit = async (product = {}) => {
     await addDoc(collection(db, 'purchases'), { 
       product_id: product?.id, 
       user_email: auth.currentUser.email,
-      created_at: new Date()
+      created_at: new Date().getTime()
     });
     console.log('Produto adicionado com sucesso:', product);
   } catch (error) {
@@ -27,7 +27,7 @@ const handleSubmit = async (product = {}) => {
   }
 };
 
-const ProductCard = ({ id, imageUrl, name, price, quantity, buttonPress, setButtonPress }) => {
+const ProductCard = ({ id, imageUrl, name, price, quantity, buttonPress, setButtonPress, setSelectedProduct, setModalVisible }) => {
   return (
     <View style={styles.card} key={id}>
       <Image source={{ uri: imageUrl }} style={styles.image} />
@@ -38,7 +38,8 @@ const ProductCard = ({ id, imageUrl, name, price, quantity, buttonPress, setButt
         style={buttonPress == id ? styles.buttonHover : styles.button}
         onPress={() => {
           setButtonPress(false);
-          handleSubmit({ id, imageUrl, name, price, quantity });
+          setSelectedProduct({ id, imageUrl, name, price, quantity });
+          setModalVisible(true);
         }}
         onPressIn={() => setButtonPress(id)}
       >
@@ -53,6 +54,8 @@ const Dashboard = ({ navigation }) => {
   const [getImages, setGetImages] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [buttonPress, setButtonPress] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -93,6 +96,14 @@ const Dashboard = ({ navigation }) => {
     }
   }, [getImages]);
 
+  const confirmPurchase = async () => {
+    if(selectedProduct) {
+      await handleSubmit(selectedProduct);
+      setModalVisible(false);
+      setSelectedProduct(null);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
@@ -112,6 +123,8 @@ const Dashboard = ({ navigation }) => {
                   quantity={product.quantity}
                   buttonPress={buttonPress}
                   setButtonPress={setButtonPress}
+                  setSelectedProduct={setSelectedProduct}
+                  setModalVisible={setModalVisible}
                 />
               ))
             ) : (
@@ -121,6 +134,44 @@ const Dashboard = ({ navigation }) => {
         </View>
       )}
       <Footer navigation={navigation} />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>Confirmar compra de {selectedProduct?.name}?</Text>
+          <Pressable
+            style={buttonPress == 'confirm' 
+              ? [styles.button, styles.buttonCloseHover]
+              : [styles.button, styles.buttonClose]
+            }
+            onPress={() => {
+              setButtonPress(false);
+              confirmPurchase();
+            }}
+            onPressIn={() => setButtonPress('confirm')}
+          >
+            <Text style={styles.textStyle}>Confirmar</Text>
+          </Pressable>
+          <Pressable
+            style={ buttonPress == 'cancel'
+              ? [styles.button, styles.buttonClose, { backgroundColor: '#b72525' }]
+              : [styles.button, styles.buttonClose, { backgroundColor: '#EC3535' }]
+            }
+            onPress={() => {
+              setButtonPress(false);
+              setModalVisible(false);
+            }}
+            onPressIn={() => setButtonPress('cancel')}
+          >
+            <Text style={styles.textStyle}>Cancelar</Text>
+          </Pressable>
+        </View>
+      </Modal>
     </View>
   );
 };

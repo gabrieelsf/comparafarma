@@ -9,20 +9,33 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    height: '100%',
+    marginBottom: 100
   },
 
   inputContainer: {
     marginTop: 140, 
   },
 
+  inputWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#1C1A58',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    width: '90%',
+  },
+
   input: {
     color: '#FFFF',
     height: 60,
     width: '90%',
-    borderWidth: 1,
     padding: 10,
-    backgroundColor: '#1C1A58',
-    borderRadius: 10,
+  },
+
+  pressable: {
+    padding: 5,
   },
 
   quickSearchContainer: {
@@ -63,16 +76,32 @@ const styles = StyleSheet.create({
   recentlySearch: {
     width: '90%',
     height: '40%',
-    marginTop: 60,
+    marginTop: 30,
+    marginBottom: 150,
+  },
+
+  scrollContainer: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignContent: 'center',
+    width: '100%',
+    height: '100%',
+    paddingBottom: 20,
+  },
+
+  scrollView: {
+    height: '40%',
+    width: '90%',
   },
 
   card: {
     backgroundColor: '#FFF',
     borderRadius: 8,
-    marginBottom: 20,
+    marginBottom: 10,
     marginTop: 10,
     padding: 15,
-    height: '85%',
+    height: '95%',
     width: '50%',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -83,7 +112,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: '100%',
-    height: 100,
+    height: 150,
     marginBottom: 10,
     borderRadius: 8,
   },

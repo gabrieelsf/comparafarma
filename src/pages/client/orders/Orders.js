@@ -6,6 +6,8 @@ import Header from '../../components/header/Header';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 const auth = getAuth()
 
@@ -62,7 +64,7 @@ const Orders = ({ navigation }) => {
 
   useEffect(() => {
     const purchased = productData.some(product =>
-      purchases.find(purchase => product.id === purchase.product_id && auth.currentUser.email == purchase.user_email)
+      purchases.find(purchase => product.id === purchase.product_id && auth?.currentUser?.email == purchase?.user_email)
     );
     setPurchasedProducts(purchased);
   }, [productData, purchases]);
@@ -76,12 +78,14 @@ const Orders = ({ navigation }) => {
             isLoading ? (
               <ActivityIndicator size="large" color="#000" />
             ) : productData.map((product) => { 
-              if(purchases.find((purchase) => product.id === purchase.product_id && auth.currentUser.email == purchase.user_email)){
+              const purchase = purchases.find((purchase) => product.id === purchase.product_id && auth.currentUser.email == purchase.user_email)
+              if(purchase){
+                console.log(purchase);
                 return (
                   <View style={styles.orderContainer} key={product.id}>
                     <View style={styles.orderDescription}>
-                      <Text style={styles.description}>Terça, 28/05/2024</Text>
-                      <Text style={styles.description}>Farmácias Pague mais</Text>
+                      <Text style={styles.description}>{format(new Date(purchase.created_at), 'EEEE, dd/MM/yyyy', { locale: ptBR })}</Text>
+                      <Text style={styles.description}>{product.sold_by}</Text>
                     </View>
                     <View style={styles.card}>
                       <Image source={{ uri: product.imageUrl }} style={styles.image} />
