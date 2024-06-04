@@ -80,7 +80,6 @@ const Orders = ({ navigation }) => {
             ) : productData.map((product) => { 
               const purchase = purchases.find((purchase) => product.id === purchase.product_id && auth.currentUser.email == purchase.user_email)
               if(purchase){
-                console.log(purchase);
                 return (
                   <View style={styles.orderContainer} key={product.id}>
                     <View style={styles.orderDescription}>
