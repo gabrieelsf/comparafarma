@@ -75,9 +75,7 @@ const styles = StyleSheet.create({
 
   recentlySearch: {
     width: '90%',
-    height: '40%',
     marginTop: 30,
-    marginBottom: 150,
   },
 
   scrollContainer: {
@@ -93,6 +91,10 @@ const styles = StyleSheet.create({
   scrollView: {
     height: '40%',
     width: '90%',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
 
   card: {
