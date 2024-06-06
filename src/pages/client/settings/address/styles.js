@@ -9,7 +9,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  
+
+  content: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    marginTop: 250,
+  },
+
   keyboardAvoidingView: {
     flex: 1,
     width: '100%',

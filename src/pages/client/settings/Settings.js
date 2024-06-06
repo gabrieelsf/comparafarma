@@ -10,8 +10,8 @@ import { getFirestore, collection, getDocs, query, where } from 'firebase/firest
 const Settings = ({ navigation }) => {
   const auth = getAuth();
   const db = getFirestore();
-  const [buttonPress, setButtonPress] = useState(false);
-  const [fullName, setFullName] = useState('usuário');
+  const [ buttonPress, setButtonPress] = useState(false);
+  const [ fullName,    setFullName   ] = useState('usuário');
 
   useEffect(() => {
     const fetchFullName = async () => {
@@ -53,14 +53,14 @@ const Settings = ({ navigation }) => {
         >
           <Text style={{ color: '#FFF' }}>Dados da conta</Text>
         </Pressable>
-        <Pressable
+        {/* <Pressable
           style={buttonPress == 'payment_methods' ? styles.buttonHover : styles.button}
           onPressIn={() => setButtonPress('payment_methods')}
           onPressOut={() => setButtonPress(false)}
           onPress={() => navigation.navigate('payment')}
         >
           <Text style={{ color: '#FFF' }}>Métodos de pagamento</Text>
-        </Pressable>
+        </Pressable> */}
         <Pressable
           style={buttonPress == 'address' ? styles.buttonHover : styles.button}
           onPressIn={() => setButtonPress('address')}

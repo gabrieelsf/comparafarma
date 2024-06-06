@@ -48,19 +48,17 @@ const Search = ({ navigation }) => {
   }, []);
 
   const handleSearch = () => {
-    console.log(inputSearch);
     const founds = []
     for(let product of productData) {
-      if(product.name.toLowerCase().includes(inputSearch)) founds.push(product)
+      if(product.name.toLowerCase().includes(inputSearch.toLowerCase())) founds.push(product)
     }
-    console.log(founds);
     if(founds.length) setProductFound(founds);
     setIsLoading(false)
   }
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header navigation={navigation}/>
       <View style={[styles.content, styles.inputContainer]}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.inputWrapper}>
@@ -112,6 +110,21 @@ const Search = ({ navigation }) => {
               <Text style={{ color: '#FFF' }}>Antiviral</Text>
             </Pressable>
           </View>
+          {!!productFound.length ?
+            <Text style={{ fontWeight: 'bold', fontSize: 23, marginTop: 20 }}>Produtos encontrados:</Text>
+            : <View style={styles.needHelp}>
+              <Text style={{ fontWeight: 'bold', fontSize: 15 }}>Em dúvida do que precisa?</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 15 }}>Navegue pelos produtos</Text>
+              <Pressable
+                style={buttonPress == 'homePage' ? styles.buttonHover : styles.button}
+                onPressIn={() => setButtonPress('homePage')}
+                onPressOut={() => setButtonPress(false)}
+                onPress={() => navigation.navigate('home')}
+              >
+                <Text style={{ color: '#FFF' }}>Página principal</Text>
+              </Pressable>
+            </View>
+          }
           {productFound.length ?
             <View style={styles.scrollView}>
               {productFound.map(product => (
@@ -126,8 +139,8 @@ const Search = ({ navigation }) => {
             : isLoading ? <ActivityIndicator size="large" color="#000" /> : <></>
           }
           <View style={styles.recentlySearch}>
-            <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Pesquisados recentemente:</Text>
-            {
+            {/* <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Pesquisados recentemente:</Text> */}
+            {/* {
               isLoading ? (
                 <ActivityIndicator size="large" color="#000" />
               ) : (
@@ -138,7 +151,7 @@ const Search = ({ navigation }) => {
                   <Text style={styles.description}>{productData[0]?.quantity?.toFixed(0)} comprimidos</Text>
                 </View>
               )
-            }
+            } */}
           </View>
         </ScrollView>
       </View>

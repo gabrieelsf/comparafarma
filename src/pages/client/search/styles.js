@@ -22,9 +22,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#1C1A58',
     alignItems: 'center',
+    justifyContent: 'space-between',
     borderWidth: 1,
     borderRadius: 10,
     width: '90%',
+    marginLeft: 10,
   },
 
   input: {
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
   },
 
   pressable: {
-    padding: 5,
+    padding: 10,
   },
 
   quickSearchContainer: {
@@ -129,6 +131,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
+
+  needHelp: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 100,
+    width: '100%',
+  }
 });
 
 export default styles;

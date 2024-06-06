@@ -30,7 +30,6 @@ const App = () => {
   useEffect(() => {
     const checkUserStatus = async () => {
       const userToken = await AsyncStorage.getItem('userToken');
-
       onAuthStateChanged(auth, (user) => {
         if (user || userToken) {
           setInitialRoute('home');

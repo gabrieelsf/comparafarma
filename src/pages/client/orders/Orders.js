@@ -86,7 +86,7 @@ const Orders = ({ navigation }) => {
                       <Text style={styles.description}>{format(new Date(purchase.created_at), 'EEEE, dd/MM/yyyy', { locale: ptBR })}</Text>
                       <Text style={styles.description}>{product.sold_by}</Text>
                     </View>
-                    <View style={styles.card}>
+                    <View>
                       <Image source={{ uri: product.imageUrl }} style={styles.image} />
                       <Text style={styles.name}>{product.name}</Text>
                       <Text style={styles.description}>R$ {product.price?.toFixed(2)}</Text>

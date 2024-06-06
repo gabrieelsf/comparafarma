@@ -21,18 +21,29 @@ const styles = StyleSheet.create({
   },
 
   scrollContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
+    // flexWrap: 'wrap',
+    alignItems: 'center',
     justifyContent: 'space-between',
     paddingBottom: 100,
   },
 
   orderContainer : {
-    width: '90%',
+    backgroundColor: '#FFF',
+    width: '95%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    borderRadius: 8,
+    marginBottom: 20,
+    marginTop: 10,
+    padding: 15,
     justifyContent: 'space-between',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 
   orderDescription: {
