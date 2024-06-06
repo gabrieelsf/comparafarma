@@ -47,10 +47,14 @@ const Search = ({ navigation }) => {
     fetchProducts();
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = (filterByType) => {
     const founds = []
     for(let product of productData) {
-      if(product.name.toLowerCase().includes(inputSearch.toLowerCase())) founds.push(product)
+      if(filterByType){
+        if(product.type.toLowerCase().includes(filterByType.toLowerCase())) founds.push(product)
+      }else {
+        if(product.name.toLowerCase().includes(inputSearch.toLowerCase())) founds.push(product)
+      }
     }
     if(founds.length) setProductFound(founds);
     setIsLoading(false)
@@ -81,7 +85,7 @@ const Search = ({ navigation }) => {
               style={buttonPress == 'antibiotic' ? styles.buttonHover : styles.button}
               onPressIn={() => setButtonPress('antibiotic')}
               onPressOut={() => setButtonPress(false)}
-              onPress={() => true}
+              onPress={() => handleSearch('antibiotic')}
             >
               <Text style={{ color: '#FFF' }}>Antibióticos</Text>
             </Pressable>
@@ -89,7 +93,7 @@ const Search = ({ navigation }) => {
               style={buttonPress == 'anti-inflammatory' ? styles.buttonHover : styles.button}
               onPressIn={() => setButtonPress('anti-inflammatory')}
               onPressOut={() => setButtonPress(false)}
-              onPress={() => true}
+              onPress={() => handleSearch('anti-inflammatory')}
             >
               <Text style={{ color: '#FFF' }}>Anti inflamtório</Text>
             </Pressable>
@@ -97,7 +101,7 @@ const Search = ({ navigation }) => {
               style={buttonPress == 'analgesic' ? styles.buttonHover : styles.button}
               onPressIn={() => setButtonPress('analgesic')}
               onPressOut={() => setButtonPress(false)}
-              onPress={() => true}
+              onPress={() => handleSearch('analgesic')}
             >
               <Text style={{ color: '#FFF' }}>Analgésico</Text>
             </Pressable>
@@ -105,7 +109,7 @@ const Search = ({ navigation }) => {
               style={buttonPress == 'antiviral' ? styles.buttonHover : styles.button}
               onPressIn={() => setButtonPress('antiviral')}
               onPressOut={() => setButtonPress(false)}
-              onPress={() => true}
+              onPress={() => handleSearch('antiviral')}
             >
               <Text style={{ color: '#FFF' }}>Antiviral</Text>
             </Pressable>
