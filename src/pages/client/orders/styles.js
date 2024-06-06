@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 
   scrollContainer: {
     flexDirection: 'column',
-    // flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingBottom: 100,

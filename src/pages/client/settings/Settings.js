@@ -53,14 +53,6 @@ const Settings = ({ navigation }) => {
         >
           <Text style={{ color: '#FFF' }}>Dados da conta</Text>
         </Pressable>
-        {/* <Pressable
-          style={buttonPress == 'payment_methods' ? styles.buttonHover : styles.button}
-          onPressIn={() => setButtonPress('payment_methods')}
-          onPressOut={() => setButtonPress(false)}
-          onPress={() => navigation.navigate('payment')}
-        >
-          <Text style={{ color: '#FFF' }}>Métodos de pagamento</Text>
-        </Pressable> */}
         <Pressable
           style={buttonPress == 'address' ? styles.buttonHover : styles.button}
           onPressIn={() => setButtonPress('address')}

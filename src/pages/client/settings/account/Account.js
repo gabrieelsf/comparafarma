@@ -3,7 +3,7 @@ import styles from './styles';
 import { Text, View, Pressable, ScrollView, KeyboardAvoidingView, Platform, TextInput, Alert } from 'react-native';
 import Footer from '../../../components/footer/footer';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore'; // Importe as funções necessárias para operações no Firestore
+import { getFirestore, collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore';
 
 const Account = ({ navigation }) => {
   const db   = getFirestore();

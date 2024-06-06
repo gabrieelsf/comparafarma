@@ -129,7 +129,7 @@ const Search = ({ navigation }) => {
               </Pressable>
             </View>
           }
-          {productFound.length ?
+          {!!productFound.length &&
             <View style={styles.scrollView}>
               {productFound.map(product => (
                 <View style={styles.card} key={product?.id}>
@@ -140,22 +140,8 @@ const Search = ({ navigation }) => {
                 </View>
               ))}
             </View>
-            : isLoading ? <ActivityIndicator size="large" color="#000" /> : <></>
           }
           <View style={styles.recentlySearch}>
-            {/* <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Pesquisados recentemente:</Text> */}
-            {/* {
-              isLoading ? (
-                <ActivityIndicator size="large" color="#000" />
-              ) : (
-                <View style={styles.card} key={productData[0]?.id}>
-                  <Image source={{ uri: productData[0]?.imageUrl }} style={styles.image} />
-                  <Text style={styles.name}>{productData[0]?.name}</Text>
-                  <Text style={styles.description}>R$ {productData[0]?.price?.toFixed(2)}</Text>
-                  <Text style={styles.description}>{productData[0]?.quantity?.toFixed(0)} comprimidos</Text>
-                </View>
-              )
-            } */}
           </View>
         </ScrollView>
       </View>
