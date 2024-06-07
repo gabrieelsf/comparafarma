@@ -11,11 +11,23 @@ const styles = StyleSheet.create({
   },
 
   form: {
-    height: '30%',
+    height: '100%',
     width: '70%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  scrollContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: 100,
+  },
+  
+  keyboardAvoidingView: {
+    width: '100%',
     justifyContent: 'center',
   },
 
